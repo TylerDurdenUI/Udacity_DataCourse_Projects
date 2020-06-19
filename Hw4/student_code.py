@@ -1,5 +1,7 @@
-from collections import namedtuple # Data type that handy to store the current state
-import heapq # Semi order all the path, so that accessing the optimal(lowest cost) path is constant time
+from collections import namedtuple
+# Data type that handy to store the current state
+import heapq
+# Semi order all the path, so that accessing the optimal(lowest cost) path is constant time
 
 COST = namedtuple('COST',['f','g','h']) 
 # f is the total cost, 
@@ -63,12 +65,12 @@ def shortest_path(input_map,origin,destination):
         path_best = heapq.heappop(all_path)
         # iterate through all possible candidate new frontier cities
         for candidate_frontier in input_map.roads[path_best.frontier]:
-            if candidate_frontier != path_best.second_last:
+            if candidate_frontier != path_best.second_last: # Avoid going backward
                 path_new = updater(input_map,path_best,candidate_frontier,destination)
-                if candidate_frontier != destination:
+                if candidate_frontier != destination: # Not reach destination yet
                     if (not path_optimal) or (path_new.cost.f<path_optimal_cost):
                         heapq.heappush(all_path,path_new)
-                else:
+                else: # only track the shorter, better one
                     if path_new.cost.f < path_optimal_cost:
                         path_optimal_cost = path_new.cost.f
                         path_optimal = path_new.city_traversed                
