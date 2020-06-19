@@ -1,0 +1,17 @@
+
+Taks0: O(1).
+In Python lists, values are assigned to and retrieved from specific, known memory locations. No matter how large the list is, index lookup and assignment take a constant amount of time and are thus O ( 1 ) O(1) O(1).
+
+
+Taks1: O(n).
+Need to iterate through lists once.
+
+
+Task2: O(n)
+Need to iterate through lists once.
+
+Task3: O(n log(n))
+Python sorted function time complexity O(n log(n)), and for loop here is O(n). Combine them together, we will get O(n log(n)).
+
+Task4: O(n log(n))
+Python sorted function time complexity O(n log(n)), and for loop here is O(n). Combine them together, we will get O(n log(n)).
