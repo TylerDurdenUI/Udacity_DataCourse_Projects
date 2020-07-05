@@ -15,6 +15,36 @@ class LRU_Cache(object):
             pop_key = self.key_order.pop(0) # Remove oldest key from list
             self.vals.pop(pop_key) # Remove the value with the oldest key in the dictionary
 
+import collections
+
+class LRUCache(object):
+    def __init__(self, capacity):
+        self.dic = collections.OrderedDict()
+        self.remain = capacity
+
+    def get(self, key):
+        if key not in self.dic:
+            return -1
+        v = self.dic.pop(key) 
+        self.dic[key] = v   # set key as the newest one
+        return v
+
+    def set(self, key, value):
+        if key in self.dic:    
+            self.dic.pop(key)
+        else:
+            if self.remain > 0:
+                self.remain -= 1  
+            else:  # self.dic is full
+                self.dic.popitem(last=False) 
+        self.dic[key] = value
+
+# Comments
+# For repeating key inserted in the OrderedDict, it will have no effect, especially on the order of the keys.
+# The logic here is using an ordered dictionary from the collections.
+# For the get method, if the key is not in the dictionary, return -1, else return the value, and move the item key to the end of the dictionary by pop and adding the same element again.
+# For the put method, if the key already inside the dictionary, pop it and adding it. If not, then it is a brand new element number, then if the capacity reaches its maximum, pop the first (oldest) one, adding a new element. if the compacity is not reached, then modified the compacity and add the new element.
+
 # testing case
 if __name__=='__main__':
     our_cache = LRU_Cache(3)
